@@ -16,11 +16,11 @@ export default function Update() {
   const handleSubmit = e => {
     e.preventDefault();
     dispatch(update({ name, email }));
+
+    setName(" ");
+    setEmail(" ");
   }
 
-
-
-  console.log(name, email);
 
   return (
     <div className="update">
@@ -48,6 +48,7 @@ export default function Update() {
                 type="text"
                 placeholder={user.name}
                 onChange={(e) => setName(e.target.value)}
+                value={name}
               />
             </div>
             <div className="formItem">
@@ -57,6 +58,7 @@ export default function Update() {
                 type="text"
                 placeholder={user.email}
                 onChange={(e) => setEmail(e.target.value)}
+                value={email}
               />
             </div>
             <div className="formItem">
