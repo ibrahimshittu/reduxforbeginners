@@ -3,7 +3,7 @@ import Warning from "../warning/Warning";
 import "./update.css";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { update, remove } from "../../redux/userSlice";
+import updateUser from "../../redux/apiCalls";
 
 export default function Update() {
   const [name, setName] = useState("");
@@ -15,7 +15,7 @@ export default function Update() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch(update({ name, email }));
+    updateUser(dispatch, { name, email});
 
     setName(" ");
     setEmail(" ");
@@ -23,7 +23,7 @@ export default function Update() {
 
   const handleDelete = e => {
     e.preventDefault();
-    dispatch(remove());
+    
   }
 
 
