@@ -2,10 +2,23 @@ import React from "react";
 import Warning from "../warning/Warning";
 import "./update.css";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { update } from "../../redux/userSlice";
 
 export default function Update() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+
+  const user = useSelector(state => state.user);
+
+  const dispatch = useDispatch();
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    dispatch(update({ name, email }));
+  }
+
+
 
   console.log(name, email);
 
@@ -16,7 +29,7 @@ export default function Update() {
         <Warning />
         <button className="delete">Delete Account</button>
         <div className="updateContainer">
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="formItem">
               <label>Profile Picture</label>
               <div className="profilePic">
@@ -33,7 +46,7 @@ export default function Update() {
               <input
                 className="formInput"
                 type="text"
-                placeholder="John"
+                placeholder={user.name}
                 onChange={(e) => setName(e.target.value)}
               />
             </div>
@@ -42,7 +55,7 @@ export default function Update() {
               <input
                 className="formInput"
                 type="text"
-                placeholder="john@gmail.com"
+                placeholder={user.email}
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
@@ -51,7 +64,7 @@ export default function Update() {
               <input className="formInput" type="password" />
             </div>
             <button
-              className="updateButton"
+              className="updateButton" type="submit"
             >
               Update
             </button>
