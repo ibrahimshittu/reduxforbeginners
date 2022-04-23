@@ -9,13 +9,13 @@ export default function Update() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
-  const user = useSelector(state => state.user);
+  const {userInfo, pending, error} = useSelector(state => state.user);
 
   const dispatch = useDispatch();
 
   const handleSubmit = e => {
     e.preventDefault();
-    updateUser({ name, email}, dispatch);
+    updateUser({ "email": name, "password": email}, dispatch);
 
     setName(" ");
     setEmail(" ");
@@ -51,7 +51,7 @@ export default function Update() {
               <input
                 className="formInput"
                 type="text"
-                placeholder={user.name}
+                placeholder={userInfo.name}
                 onChange={(e) => setName(e.target.value)}
                 value={name}
               />
@@ -61,7 +61,7 @@ export default function Update() {
               <input
                 className="formInput"
                 type="text"
-                placeholder={user.email}
+                placeholder={userInfo.email}
                 onChange={(e) => setEmail(e.target.value)}
                 value={email}
               />
@@ -71,7 +71,7 @@ export default function Update() {
               <input className="formInput" type="password" />
             </div>
             <button
-              className="updateButton" type="submit"
+              className="updateButton" type="submit" disabled={pending}
             >
               Update
             </button>

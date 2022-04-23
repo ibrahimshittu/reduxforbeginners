@@ -4,8 +4,7 @@ import axios from "axios"
 const updateUser = async (user, dispatch) => {
     dispatch(updateStart());
     try {
-        const res = await axios.post("https://picture-upload.herokuapp.com/api/v1/user/signup/", {"email": "shittu22@gmail.com",
-    "password": "shittu@gmail.com"});
+        const res = await axios.post("https://picture-upload.herokuapp.com/api/v1/user/signup/", user);
         console.log(res.data)
 
         dispatch(updateSuccess(res.data));
