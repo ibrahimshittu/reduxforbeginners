@@ -1,17 +1,14 @@
 import { updateFailure, updateSuccess, updateStart } from "./userSlice";
+import axios from "axios"
 
-const updateUser = async (dispatch, userInfo) => {
+const updateUser = async (user, dispatch) => {
     dispatch(updateStart());
     try {
-        const response = await fetch("https://picture-upload.herokuapp.com/api/v1/user/signup/", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userInfo),
-        });
-        const data = await response.json();
-        dispatch(updateSuccess(data));
+        const res = await axios.post("https://picture-upload.herokuapp.com/api/v1/user/signup/", {"email": "shittu22@gmail.com",
+    "password": "shittu@gmail.com"});
+        console.log(res.data)
+
+        dispatch(updateSuccess(res.data));
     } catch (error) {
         dispatch(updateFailure(error));
     }

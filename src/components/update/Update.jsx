@@ -15,7 +15,7 @@ export default function Update() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    updateUser(dispatch, { name, email});
+    updateUser({ name, email}, dispatch);
 
     setName(" ");
     setEmail(" ");
