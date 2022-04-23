@@ -4,6 +4,7 @@ import "./update.css";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import updateUser from "../../redux/apiCalls";
+import { updateUser2 } from "../../redux/userSlice";
 
 export default function Update() {
   const [name, setName] = useState("");
@@ -15,7 +16,8 @@ export default function Update() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    updateUser({ "email": name, "password": email}, dispatch);
+    // updateUser({ "email": name, "password": email}, dispatch);
+    dispatch(updateUser2({ "email": name, "password": email}));
 
     setName(" ");
     setEmail(" ");
@@ -75,6 +77,8 @@ export default function Update() {
             >
               Update
             </button>
+            {error && <span className="error">something went wrong!</span>}
+            {error === false && <span className="success">Successfully Updated</span>}
           </form>
         </div>
       </div>
